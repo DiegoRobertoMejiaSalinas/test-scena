@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Moveable</title>
+  </head>
+  <body>
+    <div id="builder">
+      <stage>
+        <div class="scena-reset" title="Recenter Rulers"></div>
+        <div
+          class="scena-guides scena-horizontal"
+          title="Drag to add a Guide"
+        ></div>
+        <div
+          class="scena-guides scena-vertical"
+          title="Drag to add a Guide"
+        ></div>
+        <div class="scena-viewer">
+          <div class="scena-viewport-container">
+            <div class="scena-viewport"></div>
+          </div>
+        </div>
+      </stage>
+    </div>
+    <script type="module" src="/src/index.ts"></script>
+  </body>
+</html>

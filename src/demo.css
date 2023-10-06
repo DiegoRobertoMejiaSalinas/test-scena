@@ -1,0 +1,144 @@
+* {
+  box-sizing: border-box;
+}
+
+#builder, body, html
+{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overscroll-behavior: none;
+  overflow: hidden;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  color: #333;
+  background: #f5f5f5;
+  font-weight: 300;
+  font-size: 12px;
+  font-family: sans-serif;
+}
+
+#builder {
+  display: grid;
+  grid-template-columns: minmax(50px, min-content) 1fr;
+  grid-template-rows: 1fr;
+  grid-auto-flow: row;
+  grid-template-areas: "menu-bar stage";
+}
+
+menu-bar {
+  grid-area: menu-bar;
+
+  position: relative;
+  padding: 10px;
+
+  display: grid;
+  align-items: center;
+  justify-content: center;
+
+  overflow: auto;
+  height: 100%;
+  width: min-content;
+  min-width: 50px;
+}
+menu-bar a {
+  margin: 5px;
+  position: relative;
+  text-decoration: none;
+  color: #333;
+  border: 1px solid #333;
+  text-align: center;
+  transition: all ease 0.5s;
+  min-width: min-content;
+  padding: .25em .75em;
+  height: max-content;
+  display: inline-block;
+}
+menu-bar a:hover, menu-bar a.selected {
+  background: #333;
+  color: #fff;
+}
+menu-bar a:hover {
+  cursor: pointer;
+}
+
+stage {
+  --scena-reset-dim: 30;
+  --scena-reset-dim-px: calc(var(--scena-reset-dim) * 1px);
+  overflow: hidden;
+  grid-area: stage;
+  position: relative;
+
+  display: grid;
+  grid-template-columns: var(--scena-reset-dim-px) 1fr 1fr;
+  grid-template-rows: var(--scena-reset-dim-px) 1fr 1fr;
+  grid-template-areas:
+    "guides-reset guides-horizontal guides-horizontal"
+    "guides-vertical viewer viewer"
+    "guides-vertical viewer viewer";
+}
+
+[disabled] {
+  cursor: not-allowed;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.scena-guides:where(.scena-horizontal, .scena-vertical) {
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  position: relative;
+}
+
+.scena-guides.scena-horizontal {
+  grid-area: guides-horizontal;
+}
+.scena-guides.scena-vertical {
+  grid-area: guides-vertical;
+}
+.scena-guides:where(.scena-horizontal,.scena-vertical):hover {
+  cursor: pointer;
+}
+
+.scena-reset {
+  grid-area: guides-reset;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.scena-viewer {
+  grid-area: viewer;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.scena-viewport-container {
+  position: relative;
+  height: fit-content;
+  width: fit-content;
+}
+
+.scena-viewport {
+  --canvas-widthpx: calc(var(--canvas-width) * 1px);
+  --canvas-heightpx: calc(var(--canvas-height) * 1px);
+
+  position: relative;
+  height: var(--canvas-heightpx, 250px);
+  width: var(--canvas-widthpx, 300px);
+}
+.scena-viewport:before {
+  content: "";
+  position: absolute;
+  background-color: white;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
